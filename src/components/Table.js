@@ -2,9 +2,13 @@ import React, { useContext } from 'react';
 import Context from '../hooks/Context';
 
 export default function Table() {
-  const { planets } = useContext(Context);
+  const { planets, filterByName } = useContext(Context);
 
-  console.log(planets);
+  function filterName() {
+    return (filterByName.name === undefined)
+      ? planets.filter((el) => el.name !== filterByName.name)
+      : planets.filter((e) => e.name.includes((filterByName.name)));
+  }
 
   return (
     <div>
@@ -27,23 +31,24 @@ export default function Table() {
           </tr>
         </thead>
         <tbody className="tbody-table">
-          {planets.map((val) => (
-            <tr className="tr-tbody-table" key={ val.name }>
-              <td>{val.name}</td>
-              <td>{val.rotation_period}</td>
-              <td>{val.orbital_period}</td>
-              <td>{val.diameter}</td>
-              <td>{val.climate}</td>
-              <td>{val.gravity}</td>
-              <td>{val.terrain}</td>
-              <td>{val.surface_water}</td>
-              <td>{val.population}</td>
-              <td>{val.films}</td>
-              <td>{val.created}</td>
-              <td>{val.edited}</td>
-              <td>{val.url}</td>
-            </tr>
-          ))}
+          {filterName()
+            .map((val) => (
+              <tr className="tr-tbody-table" key={ val.name }>
+                <td>{val.name}</td>
+                <td>{val.rotation_period}</td>
+                <td>{val.orbital_period}</td>
+                <td>{val.diameter}</td>
+                <td>{val.climate}</td>
+                <td>{val.gravity}</td>
+                <td>{val.terrain}</td>
+                <td>{val.surface_water}</td>
+                <td>{val.population}</td>
+                <td>{val.films}</td>
+                <td>{val.created}</td>
+                <td>{val.edited}</td>
+                <td>{val.url}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

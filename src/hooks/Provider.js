@@ -15,9 +15,9 @@ function Provider({ children }) {
     planetFetch();
   }, [getPlanets]);
 
-  const contextValue = {
-    planets,
-  };
+  const [filterByName, setFilterByName] = useState({});
+
+  const contextValue = { planets, filterByName, setFilterByName };
 
   return (
     <Context.Provider value={ contextValue }>
