@@ -2,14 +2,8 @@ import React, { useContext } from 'react';
 import Context from '../hooks/Context';
 
 export default function Table() {
-  const { planets, filterByName } = useContext(Context);
-
-  function filterName() {
-    return (filterByName.name === undefined)
-      ? planets.filter((el) => el.name !== filterByName.name)
-      : planets.filter((e) => e.name.includes((filterByName.name)));
-  }
-
+  const { filterResults } = useContext(Context);
+  // console.log(filterResults);
   return (
     <div>
       <table className="table">
@@ -30,8 +24,8 @@ export default function Table() {
             <th>URL</th>
           </tr>
         </thead>
-        <tbody className="tbody-table">
-          {filterName()
+        { <tbody className="tbody-table">
+          {filterResults // aqui será results
             .map((val) => (
               <tr className="tr-tbody-table" key={ val.name }>
                 <td>{val.name}</td>
@@ -49,8 +43,34 @@ export default function Table() {
                 <td>{val.url}</td>
               </tr>
             ))}
-        </tbody>
+          </tbody>}
       </table>
     </div>
   );
 }
+
+/*   function filterNumbers(planet) {
+    const selected = filterByNumericValues.column;
+    const comparator = filterByNumericValues.comparison;
+    const valueSelected = filterByNumericValues.value;
+
+    if (comparator === 'maior que') {
+      return planet.filter((el) => Number(el[selected]) > valueSelected);
+    }
+    if (comparator === 'menor que') {
+      return planet.filter((el) => Number(el[selected]) < valueSelected);
+    }
+    if (comparator === 'igual a') {
+      return planet.filter((el) => Number(el[selected]) === valueSelected);
+    }
+  }
+
+  const filterName = () => {
+    if (filterByName.name === undefined) {
+      const result = filterNumbers(planets.filter((el) => el.name !== filterByName.name));
+      return result;
+    }
+    const result = filterNumbers(planets.filter((e) => e.name.includes((filterByName.name))));
+    return result;
+  }; */
+
