@@ -4,13 +4,14 @@ import React, { useState, useEffect } from 'react';
 import Context from './Context';
 import ApiFetch from '../services/ApiFetch';
 
-/* const COMPARISONS = {
+/* CONT. MODELO BY GABRIEL SILVESTRE
+  const COMPARISONS = {
   'maior que': (planet, search) => Number(planet) > Number(search),
   'menor que': (planet, search) => Number(planet) < Number(search),
   'igual a ': (planet, search) => Number(planet) === Number(search),
   '': () => false,
-};
- */
+}; */
+
 function Provider({ children }) {
   // const getPlanets = ApiFetch;
   const [planets, setPlanets] = useState([]);
@@ -44,13 +45,13 @@ function Provider({ children }) {
       return null;
     } setFilterByNum([...filterByNum, { column, comparison, value }]);
   };
-  // console.log('filterByNum:', filterByNum);
 
-/*   const numFilter = () => planets
+  /* CONT. MODELO BY GABRIEL SILVESTRE
+    const numFilter = () => planets
     .filter((planet) => filterByNum
       .every(({column, comparison, value}) => COMPARISONS[comparison](planet[column], value)));
  */
-    const numFilter = (planet) => {
+  const numFilter = (planet) => {
     const filter = ({ comparison, column, value }) => {
       if (comparison === 'maior que') {
         return Number(planet[column]) > Number(value);
@@ -60,7 +61,6 @@ function Provider({ children }) {
         return Number(planet[column]) < Number(value);
       }
       if (comparison === 'igual a') {
-        console.log({planetName: planet.name, comparison, planet: planet[column], isTrue: Number(planet[column]) === Number(value) });
         return Number(planet[column]) === Number(value);
       }
     };
