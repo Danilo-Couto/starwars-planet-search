@@ -3,8 +3,7 @@ import Context from '../hooks/Context';
 
 export default function Table() {
   const { search } = useContext(Context);
-
-  console.log(search);
+ // console.log('search on Table', search);
 
   return (
     <div>

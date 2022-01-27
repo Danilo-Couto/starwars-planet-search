@@ -3,10 +3,12 @@ import Context from '../hooks/Context';
 
 export default function Filters() {
   const { filterByNum,
-    handleName, globalFilter } = useContext(Context);
+    handleName, afterClick } = useContext(Context);
 
   const columnFilter = ['population', 'orbital_period',
     'diameter', 'rotation_period', 'surface_water'];
+  // requisito 4: passar para o provider como estado e toda vez que adicionar um filtro remover este filtro das colunas;
+
   const comparative = ['maior que', 'menor que', 'igual a'];
 
   const [column, setColumn] = useState('population');
@@ -14,7 +16,7 @@ export default function Filters() {
   const [value, setValue] = useState('0');
 
   const saveInputState = () => {
-    globalFilter(column, comparison, value);
+    afterClick(column, comparison, value);
   };
 
   return (
@@ -28,38 +30,40 @@ export default function Filters() {
           onChange={ handleName }
         />
       </div>
-      <label htmlFor="column-filter">
+      <label
+        htmlFor="column"
+      >
         <select
-          name="column-filter"
+          // name="column"
+          data-testid="column-filter"
+          id="column"
           value={ filterByNum.column }
           onChange={ (e) => setColumn(e.target.value) }
-          data-testid="column-filter"
         >
           {
-            columnFilter.map((dropdown, index) => (
+            columnFilter.map((dropdown) => (
               <option
-                key={ dropdown + index }
-                value={ dropdown }
+                key={ dropdown }
+                // value={ dropdown }
               >
                 {dropdown}
               </option>))
           }
         </select>
       </label>
-      <label htmlFor="comparison-filter">
+      <label htmlFor="comparison">
         <select
           name="comparison"
           value={ filterByNum.comparison }
           onChange={ (e) => setComparison(e.target.value) }
           data-testid="comparison-filter"
-          id="comparison-filter"
+          id="comparison"
         >
           {
             comparative.map((dropdown, index) => (
               <option
                 key={ dropdown + index }
-                value={ dropdown }
-                data-testid="column-filter"
+                // value={ dropdown }
               >
                 {dropdown}
               </option>))
@@ -67,14 +71,16 @@ export default function Filters() {
         </select>
       </label>
       <input
-        name="value-filter"
+        name="value"
         type="number"
+        value={ value }
         data-testid="value-filter"
         onChange={ (e) => setValue(e.target.value) }
       />
       <button
         type="button"
         onClick={ saveInputState }
+        data-testid="button-filter"
       >
         Filtrar
       </button>

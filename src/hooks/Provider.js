@@ -1,92 +1,88 @@
+/* eslint-disable object-curly-spacing */
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import Context from './Context';
 import ApiFetch from '../services/ApiFetch';
 
-const initialInput = {
-  filterByName: {
-    name: '',
-  },
+/* const COMPARISONS = {
+  'maior que': (planet, search) => Number(planet) > Number(search),
+  'menor que': (planet, search) => Number(planet) < Number(search),
+  'igual a ': (planet, search) => Number(planet) === Number(search),
+  '': () => false,
 };
-
-const initialSelect = {
-  filterByNumericValues:
-    {
-      column: 'population',
-      comparison: 'maior que',
-      value: '0',
-    },
-};
-
+ */
 function Provider({ children }) {
-  const getPlanets = ApiFetch;
+  // const getPlanets = ApiFetch;
   const [planets, setPlanets] = useState([]);
   const [search, setSearch] = useState([]);
-  const [filterByName, setFilterByName] = useState(initialInput);
-  const [filterByNum, setFilterByNum] = useState(initialSelect);
+  const [nameFiltered, setnameFiltered] = useState(
+    { nameFiltered: { name: '' } },
+  );
+  const [filterByNum, setFilterByNum] = useState([]);
 
+  // API planetas
   useEffect(() => {
     async function planetFetch() {
-      const data = await getPlanets();
+      const data = await ApiFetch();
       setPlanets(data);
     }
     planetFetch();
-  }, [getPlanets]);
+  }, []);
 
-  useEffect(() => {
-    (() => {
-      setSearch(() => planets.filter((e) => e.name
-        .includes(filterByName.filterByName.name)));
-    })();
-  }, [filterByName, planets]);
+  // console.log('search on provider:', search);
 
   const handleName = ({ target }) => {
-    setFilterByName({
-      filterByName: {
+    setnameFiltered({
+      nameFiltered: {
         name: target.value,
       },
     });
   };
 
-  // console.log(filterByNum);
-
-  const globalFilter = (...obj) => {
-    const [column, comparison, value] = obj;
-    // console.log(column, comparison, value);
-    setFilterByNum({
-      filterByNumericValues: { column, comparison, value },
-    });
+  const afterClick = (column, comparison, value) => {
+    if (filterByNum.some((el) => el.column === column)) {
+      return null;
+    } setFilterByNum([...filterByNum, { column, comparison, value }]);
   };
+  // console.log('filterByNum:', filterByNum);
 
-  // console.log(filterByNum);
-
-  const finalResult = () => {
-    const { column, comparison, value } = filterByNum.filterByNumericValues;
-    const filter = search.filter((el) => {
+/*   const numFilter = () => planets
+    .filter((planet) => filterByNum
+      .every(({column, comparison, value}) => COMPARISONS[comparison](planet[column], value)));
+ */
+    const numFilter = (planet) => {
+    const filter = ({ comparison, column, value }) => {
       if (comparison === 'maior que') {
-        return el[column] > Number(value);
+        return Number(planet[column]) > Number(value);
       }
       if (comparison === 'menor que') {
-        return el[column] < Number(value);
+        // console.log({planetName: planet.name, comparison, planet: planet[column], isTrue: Number(planet[column]) < Number(value) });
+        return Number(planet[column]) < Number(value);
       }
-      return el[column] === Number(value);
-    });
-    setSearch(filter);
-    // console.log('filter', filter);
+      if (comparison === 'igual a') {
+        console.log({planetName: planet.name, comparison, planet: planet[column], isTrue: Number(planet[column]) === Number(value) });
+        return Number(planet[column]) === Number(value);
+      }
+    };
+    return filterByNum.every((el) => filter(el));
   };
 
   useEffect(() => {
-    finalResult();
-  }, [filterByNum]);
+    (() => {
+      setSearch(() => planets.filter((e) => e.name
+        .includes(nameFiltered.nameFiltered.name))
+        .filter(numFilter));
+    })();
+  }, [nameFiltered, planets, filterByNum]);
 
   const contextValue = {
     planets,
-    filterByName,
-    setFilterByName,
+    nameFiltered,
+    setnameFiltered,
     filterByNum,
     setFilterByNum,
     handleName,
-    globalFilter,
+    afterClick,
     search,
   };
 
