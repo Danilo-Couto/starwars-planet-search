@@ -3,13 +3,13 @@ import Context from '../hooks/Context';
 
 export default function Filters() {
   const { filterByNum,
-    handleName, afterClick, columnFilter } = useContext(Context);
+    handleSearch, afterClick, columnFilter } = useContext(Context);
   const comparative = ['maior que', 'menor que', 'igual a'];
   const [column, setColumn] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [value, setValue] = useState('0');
 
-  const saveInputState = () => {
+  const saveLocalState = () => {
     afterClick(column, comparison, value);
   };
 
@@ -21,14 +21,13 @@ export default function Filters() {
           type="text"
           placeholder="Tatoo"
           data-testid="name-filter"
-          onChange={ handleName }
+          onChange={ handleSearch }
         />
       </div>
       <label
         htmlFor="column"
       >
         <select
-          // name="column"
           data-testid="column-filter"
           id="column"
           value={ filterByNum.column }
@@ -73,7 +72,7 @@ export default function Filters() {
       />
       <button
         type="button"
-        onClick={ saveInputState }
+        onClick={ saveLocalState }
         data-testid="button-filter"
       >
         Filtrar

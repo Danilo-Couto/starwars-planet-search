@@ -19,10 +19,8 @@ function Provider({ children }) {
     { nameFiltered: { name: '' } },
   );
   const [filterByNum, setFilterByNum] = useState([]);
-
   const [columnFilter, setColumnFilter] = useState(['population', 'orbital_period',
     'diameter', 'rotation_period', 'surface_water']);
-  // requisito 4: passar para o provider como estado e toda vez que adicionar um filtro remover este filtro das colunas;
 
   // API planetas
   useEffect(() => {
@@ -33,7 +31,7 @@ function Provider({ children }) {
     planetFetch();
   }, []);
 
-  const handleName = ({ target }) => {
+  const handleSearch = ({ target }) => {
     setnameFiltered({
       nameFiltered: {
         name: target.value,
@@ -83,10 +81,11 @@ function Provider({ children }) {
     setnameFiltered,
     filterByNum,
     setFilterByNum,
-    handleName,
+    handleSearch,
     afterClick,
     search,
     columnFilter,
+    setColumnFilter,
   };
 
   return (

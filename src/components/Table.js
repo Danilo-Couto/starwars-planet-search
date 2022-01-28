@@ -2,10 +2,33 @@ import React, { useContext } from 'react';
 import Context from '../hooks/Context';
 
 export default function Table() {
+  const magicNumber = 5;
   const { search } = useContext(Context);
+  const { filterByNum, columnFilter,
+    setFilterByNum, setColumnFilter } = useContext(Context);
+
+  function removeFilter(columnDisplayed) {
+    const filterRemoved = Object.values(filterByNum)
+      .filter((e) => e.column !== columnDisplayed);
+    setFilterByNum(filterRemoved);
+    if (columnFilter.length !== magicNumber) {
+      const backToColumn = [columnDisplayed, ...columnFilter];
+      setColumnFilter(backToColumn);
+    } return null;
+  }
+
+  function showFilterInUse() {
+    return Object.values(filterByNum).map(({ column, comparison, value }) => (
+      <div key={ column } data-testid="filter">
+        <p>{`${column} ${comparison} ${value}`}</p>
+        <button type="button" onClick={ () => removeFilter(column) }>x</button>
+      </div>
+    ));
+  }
 
   return (
     <div>
+      {filterByNum && showFilterInUse()}
       <table className="table">
         <thead className="thead-table">
           <tr className="tr-table">
