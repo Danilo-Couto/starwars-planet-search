@@ -3,14 +3,8 @@ import Context from '../hooks/Context';
 
 export default function Filters() {
   const { filterByNum,
-    handleName, afterClick } = useContext(Context);
-
-  const columnFilter = ['population', 'orbital_period',
-    'diameter', 'rotation_period', 'surface_water'];
-  // requisito 4: passar para o provider como estado e toda vez que adicionar um filtro remover este filtro das colunas;
-
+    handleName, afterClick, columnFilter } = useContext(Context);
   const comparative = ['maior que', 'menor que', 'igual a'];
-
   const [column, setColumn] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [value, setValue] = useState('0');
