@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import Context from '../hooks/Context';
 
+const magicNumber = 5;
+
 export default function Table() {
-  const magicNumber = 5;
-  const { search } = useContext(Context);
-  const { filterByNum, columnFilter,
+  const { search, filterByNum, columnFilter,
     setFilterByNum, setColumnFilter } = useContext(Context);
 
   function removeFilter(columnDisplayed) {
@@ -50,7 +50,11 @@ export default function Table() {
         <tbody className="tbody-table">
           {search.map((val) => (
             <tr className="tr-tbody-table" key={ val.name }>
-              <td>{val.name}</td>
+              <td
+                data-testid="planet-name"
+              >
+                {val.name}
+              </td>
               <td>{val.rotation_period}</td>
               <td>{val.orbital_period}</td>
               <td>{val.diameter}</td>

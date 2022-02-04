@@ -1,16 +1,42 @@
 import React, { useContext, useState } from 'react';
 import Context from '../hooks/Context';
 
+const comparative = ['maior que', 'menor que', 'igual a'];
+
 export default function Filters() {
   const { filterByNum,
-    handleSearch, afterClick, columnFilter } = useContext(Context);
-  const comparative = ['maior que', 'menor que', 'igual a'];
+    handleSearch, afterClick, columnFilter, sortTable, columnToSort, setColumnToSort, setSortTable } = useContext(Context);
   const [column, setColumn] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [value, setValue] = useState('0');
 
   const saveLocalState = () => {
-    afterClick(column, comparison, value);
+    afterClick(column, comparison, value, sortTable);
+  };
+
+  const [orderTable, setOrderTable] = useState({
+    order: {
+      column: 'population',
+      sortBy: 'ASC',
+    },
+  });
+
+  const handleSort = ({ target }) => {
+    setOrderTable({
+      order: {
+        column: columnToSort,
+        sortBy: target.value,
+      },
+    });
+  };
+
+  const sendSortedToProvider = () => {
+    setSortTable({
+      order: {
+        column: orderTable.order.column,
+        sortBy: orderTable.order.sortBy,
+      },
+    });
   };
 
   return (
@@ -37,7 +63,6 @@ export default function Filters() {
             columnFilter.map((dropdown) => (
               <option
                 key={ dropdown }
-                // value={ dropdown }
               >
                 {dropdown}
               </option>))
@@ -76,6 +101,49 @@ export default function Filters() {
         data-testid="button-filter"
       >
         Filtrar
+      </button>
+      Ordenar Por:
+      <select
+        data-testid="column-sort"
+        id="sortBy"
+        name="sortBy"
+        value={ columnToSort }
+        onChange={ (e) => setColumnToSort(e.target.value) }
+      >
+        {
+          columnFilter.map((dropdown) => (
+            <option
+              key={ dropdown }
+            >
+              {dropdown}
+            </option>))
+        }
+      </select>
+      <input
+        type="radio"
+        // id="ASC"
+        name="radio"
+        value="ASC"
+        data-testid="column-sort-input-asc"
+        defaultChecked
+        onChange={ (e) => handleSort(e) }
+      />
+      ascendente
+      <input
+        type="radio"
+        // id="DESC"
+        name="radio"
+        value="DESC"
+        data-testid="column-sort-input-desc"
+        onChange={ (e) => handleSort(e) }
+      />
+      descendente
+      <button
+        type="button"
+        data-testid="column-sort-button"
+        onClick={ () => sendSortedToProvider() }
+      >
+        Ordenar
       </button>
     </div>);
 }

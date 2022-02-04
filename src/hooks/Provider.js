@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-spacing */
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Context from './Context';
 import ApiFetch from '../services/ApiFetch';
 
@@ -15,14 +15,21 @@ import ApiFetch from '../services/ApiFetch';
 function Provider({ children }) {
   const [planets, setPlanets] = useState([]);
   const [search, setSearch] = useState([]);
-  const [nameFiltered, setnameFiltered] = useState(
+  const [nameFiltered, setNameFiltered] = useState(
     { nameFiltered: { name: '' } },
   );
   const [filterByNum, setFilterByNum] = useState([]);
   const [columnFilter, setColumnFilter] = useState(['population', 'orbital_period',
     'diameter', 'rotation_period', 'surface_water']);
 
-  // API planetas
+  const [columnToSort, setColumnToSort] = useState('population');
+  const [sortTable, setSortTable] = useState({
+    order: {
+      column: '',
+      sortBy: '',
+    },
+  });
+
   useEffect(() => {
     async function planetFetch() {
       const data = await ApiFetch();
@@ -32,7 +39,7 @@ function Provider({ children }) {
   }, []);
 
   const handleSearch = ({ target }) => {
-    setnameFiltered({
+    setNameFiltered({
       nameFiltered: {
         name: target.value,
       },
@@ -50,8 +57,8 @@ function Provider({ children }) {
   /* CONT. MODELO BY GABRIEL SILVESTRE
     const numFilter = () => planets
     .filter((planet) => filterByNum
-      .every(({column, comparison, value}) => COMPARISONS[comparison](planet[column], value)));
- */
+      .every(({column, comparison, value}) => COMPARISONS[comparison](planet[column], value))); */
+
   const numFilter = (planet) => {
     const filter = ({ comparison, column, value }) => {
       if (comparison === 'maior que') {
@@ -67,18 +74,28 @@ function Provider({ children }) {
     return filterByNum.every((el) => filter(el));
   };
 
+  const sortArray = useCallback((searchResult) => {
+    if (sortTable.order.sortBy === '') {
+      setSearch(searchResult.sort((a, b) => a.name.localeCompare(b.name)));
+    } else if (sortTable.order.sortBy === 'ASC') {
+      setSearch(searchResult.sort((a, b) => a[columnToSort] - b[columnToSort]));
+    } else {
+      setSearch(searchResult.sort((a, b) => b[columnToSort] - a[columnToSort]));
+    }
+  }, [planets, sortTable]);
+
   useEffect(() => {
     (() => {
-      setSearch(() => planets.filter((planet) => planet.name
+      sortArray(planets.filter((planet) => planet.name
         .includes(nameFiltered.nameFiltered.name))
         .filter(numFilter));
     })();
-  }, [nameFiltered, planets, filterByNum]);
+  }, [planets, nameFiltered, filterByNum, sortTable]);
 
   const contextValue = {
     planets,
     nameFiltered,
-    setnameFiltered,
+    setNameFiltered,
     filterByNum,
     setFilterByNum,
     handleSearch,
@@ -86,6 +103,12 @@ function Provider({ children }) {
     search,
     columnFilter,
     setColumnFilter,
+    sortTable,
+    setSortTable,
+    columnToSort,
+    setColumnToSort,
+    setSearch,
+    sortArray,
   };
 
   return (
