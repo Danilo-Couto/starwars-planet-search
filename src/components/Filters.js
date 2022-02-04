@@ -5,7 +5,8 @@ const comparative = ['maior que', 'menor que', 'igual a'];
 
 export default function Filters() {
   const { filterByNum,
-    handleSearch, afterClick, columnFilter, sortTable, columnToSort, setColumnToSort, setSortTable } = useContext(Context);
+    handleSearch, afterClick, columnFilter,
+    sortTable, columnToSort, setColumnToSort, setSortTable } = useContext(Context);
   const [column, setColumn] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [value, setValue] = useState('0');
