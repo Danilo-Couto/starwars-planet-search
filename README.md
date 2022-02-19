@@ -1,16 +1,4 @@
-## Termos e acordos
-
-Ao iniciar este projeto, você concorda com as diretrizes do Código de Ética e Conduta e do Manual da Pessoa Estudante da Trybe.
-
 # Boas vindas ao repositório do projeto Starwars Planets Search em context api e hooks!
-
-Você já usa o GitHub diariamente para desenvolver os exercícios, certo? Agora, para desenvolver os projetos, você deverá seguir as instruções a seguir. Fique atento a cada passo e, se tiver qualquer dúvida, nos envie por _Slack_! #vqv 🚀
-
-Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu projeto a partir deste repositório, utilizando uma branch específica e um _Pull Request_ para colocar seus códigos.
-
----
-
-# Sumário
 
 - [Habilidades](#habilidades)
 - [Entregáveis](#entregáveis)
@@ -68,22 +56,10 @@ Este repositório já contém um _template_ de uma aplicação React criado e co
 
 ---
 
-## Data de entrega
-
-  - Projeto individual.
-
-  - Serão `dois` dias de projeto.
-
-  - Data de entrega para avaliação final do projeto: `02/02/2022 - 14:00h`.
-
----
-
-# Instruções para entregar seu projeto:
-
 ## Antes de começar a desenvolver
 
 1. Clone o repositório
-  * `git clone git@github.com:tryber/sd-016-b-project-starwars-planets-search.git`
+  * 
   * Entre na pasta do repositório que você acabou de clonar:
     * `cd sd-016-b-project-starwars-planets-search`
 
@@ -353,22 +329,6 @@ Para **"entregar"** seu projeto, siga os passos a seguir:
 * Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas
   * No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**
   * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**
-  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time `tryber/students-sd-00`
-
----
-
-# Revisando um pull request
-
-Use o conteúdo sobre [Code Review](https://course.betrybe.com/real-life-engineer/code-review/) para te ajudar a revisar os _Pull Requests_.
-
----
-
-# Avisos Finais
-
-Ao finalizar e submeter o projeto, não se esqueça de avaliar sua experiência preenchendo o formulário. Leva menos de 3 minutos!
-
-Link: [Avaliação](https://be-trybe.typeform.com/to/ZTeR4IbH)
-
-O avaliador automático não necessariamente avalia seu projeto na ordem em que os requisitos aparecem no _README_. Isso acontece para deixar o processo de avaliação mais rápido. Então, não se assuste se isso acontecer, ok?
+  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time.
 
 ---
