@@ -4,14 +4,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Context from './Context';
 import ApiFetch from '../services/ApiFetch';
 
-/* CONT. MODELO BY GABRIEL SILVESTRE
-  const COMPARISONS = {
-  'maior que': (planet, search) => Number(planet) > Number(search),
-  'menor que': (planet, search) => Number(planet) < Number(search),
-  'igual a ': (planet, search) => Number(planet) === Number(search),
-  '': () => false,
-}; */
-
 function Provider({ children }) {
   const [planets, setPlanets] = useState([]);
   const [search, setSearch] = useState([]);
@@ -21,7 +13,6 @@ function Provider({ children }) {
   const [filterByNum, setFilterByNum] = useState([]);
   const [columnFilter, setColumnFilter] = useState(['population', 'orbital_period',
     'diameter', 'rotation_period', 'surface_water']);
-
   const [columnToSort, setColumnToSort] = useState('population');
   const [sortTable, setSortTable] = useState({
     order: {
@@ -53,11 +44,6 @@ function Provider({ children }) {
     setFilterByNum([...filterByNum, { column, comparison, value }]);
     setColumnFilter(columnFilter.filter((el) => el !== column));
   };
-
-  /* CONT. MODELO BY GABRIEL SILVESTRE
-    const numFilter = () => planets
-    .filter((planet) => filterByNum
-      .every(({column, comparison, value}) => COMPARISONS[comparison](planet[column], value))); */
 
   const numFilter = (planet) => {
     const filter = ({ comparison, column, value }) => {
