@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-export const TableCss = styled.form`
-
+export const TableCss = styled.div`
 table, th, td {
   margin-top:1rem;
   width: 100%;
@@ -20,7 +19,7 @@ td{
 }
 `;
 
-export const AroundFilters = styled.header`
+export const AroundFilters = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;

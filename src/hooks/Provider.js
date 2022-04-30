@@ -29,10 +29,16 @@ function Provider({ children }) {
     planetFetch();
   }, []);
 
+  function capitalizeFirstLetter(string) {
+    if (!string) return string;
+    return string[0].toUpperCase() + string.slice(1);
+  }
+
   const handleSearch = ({ target }) => {
+    const searchName = capitalizeFirstLetter(target.value);
     setNameFiltered({
       nameFiltered: {
-        name: target.value,
+        name: searchName,
       },
     });
   };
