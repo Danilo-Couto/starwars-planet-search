@@ -1,52 +1,15 @@
-# Boas vindas ao repositório do projeto Starwars Planets Search em context api e hooks!
-
-- [Habilidades](#habilidades)
-- [Entregáveis](#entregáveis)
-  - [O que deverá ser desenvolvido](#o-que-deverá-ser-desenvolvido)
-  - [Desenvolvimento](#desenvolvimento)
-  - [Data de entrega](#data-de-entrega)
-- [Instruções para entregar seu projeto:](#instruções-para-entregar-seu-projeto)
-  - [Antes de começar a desenvolver](#antes-de-começar-a-desenvolver)
-  - [Durante o desenvolvimento](#durante-o-desenvolvimento)
-- [Como desenvolver](#como-desenvolver)
-  - [Linter](#linter)
-- [Requisitos do projeto](#requisitos-do-projeto)
-  - [Lista de requisitos](#lista-de-requisitos)
-
-    `Requisitos obrigatórios:`
-    - [1 - Faça uma requisição para o endpoint /planets da API de Star Wars e preencha uma tabela com os dados retornados, com exceção dos da coluna residents](#1---faça-uma-requisição-para-o-endpoint-planets-da-api-de-star-wars-e-preencha-uma-tabela-com-os-dados-retornados-com-exceção-dos-da-coluna-residents)
-    - [2 - Filtre a tabela através de um texto, inserido num *campo de texto*, exibindo somente os planetas cujos nomes incluam o texto digitado](#2---filtre-a-tabela-através-de-um-texto-inserido-num-campo-de-texto-exibindo-somente-os-planetas-cujos-nomes-incluam-o-texto-digitado)
-    - [3 - Crie um filtro para valores numéricos](#3---crie-um-filtro-para-valores-numéricos)
-    - [4 - Não utilize filtros repetidos](#4---não-utilize-filtros-repetidos)
-    - [5 - Apague o filtro de valores numéricos e desfaça as filtragens dos dados da tabela ao clicar no ícone de X de um dos filtros](#5---apague-o-filtro-de-valores-numéricos-e-desfaça-as-filtragens-dos-dados-da-tabela-ao-clicar-no-ícone-de-x-de-um-dos-filtros)
-
-    `Requisitos bônus:`
-    - [6 - Ordene as colunas de forma ascendente ou descendente](#6---ordene-as-colunas-de-forma-ascendente-ou-descendente)
-- [Depois de terminar o desenvolvimento (opcional)](#depois-de-terminar-o-desenvolvimento-opcional)
-- [Revisando um pull request](#revisando-um-pull-request)
-- [Avisos Finais](#avisos-finais)
-
----
-
 # Habilidades
 
-Nesse projeto, você será capaz de:
-
-* Utilizar a _Context API_ do **React** para gerenciar estado.
-* Utilizar o _React Hook useState_;
-* Utilizar o _React Hook useContext_;
-* Utilizar o _React Hook useEffect_;
-* Criar _React Hooks_ customizados.
-
+* _Context API_ do **React** para gerenciar estado.
+* _React Hook useState_;
+* _React Hook useContext_;
+* _React Hook useEffect_;
+* _React Hooks_ customizados.
 ---
-
-# Entregáveis
 
 ## O que deverá ser desenvolvido
 
 Você vai desenvolver uma lista com filtros de planetas do universo de Star Wars usando **Context API e Hooks** para controlar os estados globais.
-
-Lembre-se que você pode consultar nosso conteúdo sobre Git & GitHub no Course sempre que precisar!
 
 ---
 
@@ -59,9 +22,7 @@ Este repositório já contém um _template_ de uma aplicação React criado e co
 ## Antes de começar a desenvolver
 
 1. Clone o repositório
-  * 
   * Entre na pasta do repositório que você acabou de clonar:
-    * `cd sd-016-b-project-starwars-planets-search`
 
 2. Instale as dependências e inicialize o projeto
   * Instale as dependências:
@@ -106,54 +67,6 @@ Para garantir a qualidade do seu código de forma a tê-lo mais legível, de mai
 npm run lint
 npm run lint:styles
 ```
-
-⚠ **PULL REQUESTS COM ISSUES DE LINTER NÃO SERÃO AVALIADAS. ATENTE-SE PARA RESOLVÊ-LAS ANTES DE FINALIZAR O DESENVOLVIMENTO!** ⚠
-
----
-
-## Execução de testes unitários
-
-Neste projeto utilizamos a [React Testing Library (RTL)](https://testing-library.com/docs/react-testing-library/intro) para execução dos testes unitários.
-
-Em alguns dos [Requisitos do projeto](#requisitos-do-projeto) será pedido que você coloque o atributo `data-testid` nos elementos HTML. Isso acontece pois a RTL utiliza esse atributo para poder verificar a solução proposta.
-
-Por exemplo, se o requisito pedir "crie um botão e adicione o id de teste (ou `data-testid`) com o valor `my-action`", você poderá criar:
-
-```html
-<button data-testid="my-action"></button>
-```
-
-ou
-
-```html
-<a data-testid="my-action"><a/>
-```
-
-O atributo `data-testid="my-action"` servirá para a React Testing Library identificar o elemento e, dessa forma, será possível realizar os testes unitários focados no comportamento da aplicação.
-
-**Importante:** Em alguns requisitos, utilizamos o método `getByRole` para poder selecionar os elementos de forma semântica. Portanto atente-se às instruções de cada requisito. Por exemplo, se o requisito pedir explicitamente um button, você deverá utilizar exatamente esse elemento.
-
-Para verificar se seu projeto atende aos requisitos, você pode executar todos os testes unitários localmente, executando o comando:
-
-```bash
-npm test
-```
-
-### Dica: desativando testes
-
-Para rodar apenas um teste, basta a utilização da função `.only` após o describe. Com isso, será possível que apenas um requisito rode localmente e seja avaliado.
-
-![image](describe-only.png)
-![image](only-all-green.png)
-
-Caso queira avaliar apenas um tópico do requisito, você também pode usar o `.only` após o `it`.
-
-![image](it-only.png)
-![image](only-one-green.png)
-
-
-
-# Requisitos do projeto
 
 ## Lista de requisitos
 
@@ -329,6 +242,5 @@ Para **"entregar"** seu projeto, siga os passos a seguir:
 * Vá até a página **DO SEU** _Pull Request_, adicione a label de _"code-review"_ e marque seus colegas
   * No menu à direita, clique no _link_ **"Labels"** e escolha a _label_ **code-review**
   * No menu à direita, clique no _link_ **"Assignees"** e escolha **o seu usuário**
-  * No menu à direita, clique no _link_ **"Reviewers"** e digite `students`, selecione o time.
 
 ---
