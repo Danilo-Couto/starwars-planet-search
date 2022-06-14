@@ -1,5 +1,7 @@
+/* eslint-disable react/jsx-max-depth */
 import React, { useContext } from 'react';
 import Context from '../hooks/Context';
+import { TableCss } from '../styles/general';
 
 const magicNumber = 5;
 
@@ -27,7 +29,7 @@ export default function Table() {
   }
 
   return (
-    <div>
+    <TableCss>
       {filterByNum && showFilterInUse()}
       <table className="table">
         <thead className="thead-table">
@@ -71,6 +73,6 @@ export default function Table() {
           ))}
         </tbody>
       </table>
-    </div>
+    </TableCss>
   );
 }
