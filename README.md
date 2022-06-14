@@ -5,6 +5,7 @@
 * _React Hook useContext_;
 * _React Hook useEffect_;
 * _React Hooks_ customizados.
+* _Styeld Components
 ---
 
 ## O que deverá ser desenvolvido
