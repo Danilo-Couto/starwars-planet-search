@@ -44,7 +44,6 @@ export default function Filters() {
   return (
     <AroundFilters>
       <h1> StarWars Planet Search</h1>
-
       <div className="filterBy">
         <p>Filtrar Por Nome:</p>
         <input

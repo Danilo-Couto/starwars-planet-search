@@ -36,7 +36,7 @@ export const AroundFilters = styled.div`
   }
   h1{
     order: 3;
-    text-align: left;
+    text-align: center;
     font-size: 100px;
     margin:1rem;
   }
